@@ -7,7 +7,6 @@ import { useRouter } from 'next/navigation';
 import { ShoppingBagIcon } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { FaCartShopping } from 'react-icons/fa6';
 import { MdCheckBoxOutlineBlank, } from 'react-icons/md';
 import { IoLocationOutline } from 'react-icons/io5';
 

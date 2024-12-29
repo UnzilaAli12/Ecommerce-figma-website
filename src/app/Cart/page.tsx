@@ -9,8 +9,6 @@ import Footer from '@/app/components/Footer'
 import { Input } from "@/components/ui/input";
 import { Heart, Menu, Search } from 'lucide-react';
 import { Button } from "@/components/ui/button";
-import { SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
-import { Sheet } from '@/components/ui/sheet';
 import { ShoppingBagIcon } from '@/components/ui/sheet';
 
 

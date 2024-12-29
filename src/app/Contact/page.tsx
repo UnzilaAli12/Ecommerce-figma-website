@@ -4,21 +4,9 @@ import Footer from "@/app/components/Footer";
 import Link from "next/link";
 import Image from "next/image";
 import { Input } from "@/components/ui/input";
-import {
-  Heart,
-  Menu,
-  Search,
-  ShoppingBagIcon,
-  ThumbsDown,
-  ThumbsUp,
-} from "lucide-react";
+import { Heart, Menu, Search, ShoppingBagIcon, ThumbsDown, ThumbsUp} from "lucide-react";
 import { Button } from "@/components/ui/button";
-import {
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
+import { SheetContent, SheetHeader, SheetTitle, SheetTrigger} from "@/components/ui/sheet";
 import { Sheet } from "@/components/ui/sheet";
 
 const ContactUs = () => {

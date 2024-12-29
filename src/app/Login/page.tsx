@@ -1,17 +1,15 @@
 "use client"
 import React from 'react'
 import Header from '@/app/components/Header'
-import Footer from '@/app/components/Footer'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation';
 import { Input } from "@/components/ui/input";
-import { ChevronDown,ChevronUp, Heart, Menu, Scroll, Search, ShoppingBag, ShoppingBagIcon } from 'lucide-react';
+import { Heart, Menu, Search, ShoppingBagIcon } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { Sheet } from '@/components/ui/sheet';
-import { HiAdjustmentsHorizontal } from 'react-icons/hi2';
-import { PiRectangleBold } from 'react-icons/pi';
+
 
 const Login = () => {
   const router = useRouter();
