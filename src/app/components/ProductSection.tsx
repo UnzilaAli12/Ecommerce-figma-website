@@ -1,102 +1,64 @@
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+"use client"
+import {useEffect, useState} from 'react';
 import React from 'react'
 import Image from 'next/image'
-import { Card, CardHeader, CardContent, CardTitle, CardDescription } from "@/components/ui/card";
-const ProductSection = () => {
-    
-      const products = [
-        {
-          id: 1,
-          name: "Nike Air Max Pulse",
-          description: "Women's Shoes",
-          price: "₹13,995",
-          image: "/shoe1.svg", 
-        },
-        {
-          id: 2,
-          name: "Nike Air Max Pulse",
-          description: "Men's Shoes",
-          price: "₹13,995",
-          image: "/shoe2.svg", 
-        },
-        {
-          id: 3,
-          name: "Nike Air Max 97 SE",
-          description: "Men's Shoes",
-          price: "₹16,995",
-          image: "/shoe3.svg", 
-        },
-      ];
- 
+import { Product } from '../../../types/products';
+import { client } from '@/sanity/lib/client';
+import { allProducts} from '@/sanity/lib/queries';
+import { urlFor } from '@/sanity/lib/image';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
+
+const ProductSection = (p0: { params: any; }, ProductSectionDetail: any) => {
+  const [product, setProduct] = useState<Product[]>([])
+useEffect(() => {
+  async function fetchproduct(){
+    const fetchproduct : Product[] = await client.fetch(allProducts)
+    setProduct(fetchproduct)
+  }
+  fetchproduct()
+},[])    
+     
     return (
-    <div>
-<div className='flex items-center justify-between mx-8 ' >
-<h2 className='w-[161px] h-[27px] font-medium text-xl mt-28  ' >
-Best of Air Max 
-</h2>
-
-<div className='' >
-<p className='w-[37px] h-[24px] font-medium mt-28 flex items-center justify-center' >
-Shop
-<ChevronLeft className=' rounded-full bg-[#CCCCCC]  ' />
-<ChevronRight className=' rounded-full bg-[#E5E5E5]' />
-</p>
-</div>
-</div> 
- <div className="container mx-auto p-6 mt-4">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {products.map((product) => (
-          <Card key={product.id} className="rounded-lg border shadow-sm">
-      
-            <CardHeader className="p-0">
-              <img
-                src={product.image}
-                alt={product.name}
-                className="w-full h-64 object-cover rounded-t-lg"
-              />
-            </CardHeader>
-
-            <CardContent className="p-4 flex flex-col space-y-2">
-              <div className="flex justify-between items-center">
-                <h3 className="text-lg font-medium">{product.name}</h3>
-                <span className="text-gray-800 font-semibold">{product.price}</span>
-              </div>
-              <p className="text-sm text-gray-500">{product.description}</p>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
-    </div>
-
-    <div className='mx-8  ' >
-        <h2 className='font-medium  text-xl  mt-10 ' >
-        Featured
+    <><div className='w-full px-4 py-8 '>
+        <h2 className=' font-bold text-center items-center justify-center text-4xl mt-28 mb-10 ml-3 md:ml-6 '>
+          Our Latest
         </h2>
-        <div className=' ' >
- <Image className=' mt-4  '
-  src="/featured.svg"
-  alt="Image"
-  width={1344}
-  height={700}
-  />
-  </div>
+        <div className=" px-2 md:px-6 mt-4  ">
+          <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5  '>
 
-  <h1 className='font-medium text-[56px] leading-[60px] flex items-center justify-center mt-2' >
-STEP INTO WHAT FEELS GOOD
-</h1>
-<p className='text-sm flex items-center justify-center mt-6 text-center ' >
-Cause everyone should know the feeling of running in that perfect pair.
-</p>
-<div className='flex justify-center gap-6 mt-6  ' >
-  <button className='w-[152px] h-[39px] font-medium text-white bg-black rounded-[30px]  items-center   ' >
-  Find Your Shoe
-  </button>
 
-    </div>
-    </div>
+            {product.map((product) => (
+              <div key={product._id}
+             
+                className='border rounded-md shadow-md px-0 md:px-2 hover:cursor-pointer hover:shadow-2xl'>
+       <Link href={`/product/${product.slug.current}`} target='_blank'>
+                  {product.image && (
+                    <Image
+                      src={urlFor(product.image).url()}
+                      alt={product.description}
+                      width={280}
+                      height={280}
+                      className='w-full h-auto object-cover' />
+                  )} 
+                <h2 className='mt-2 px-2 text-blue-500 font-semibold'>{product.status}</h2>
+                <h1 className='text-lg font-semibold mt-4 px-2'>    {product.productName}</h1>
+
+                <h1 className='text-red-500 font-bold mt-2 px-2'>${product.price}</h1>
+                <h2 className='px-2'>{product.category}</h2>
+                <p className='text-gray-400 mt-4 px-2'>{product.inventory} pieces left</p>
+                </Link>
+          </div>
+          ))}
+        </div>
+      
+      </div><div className='flex items-center justify-center mt-16'>
+          <Link href='/AllProducts' target='_blank'>  <Button className='text-lg py-5 px-8'>View All </Button> </Link>
+        </div>    </div></>
+        
     
-    </div>
-  )
+  );
 }
 
 export default ProductSection
+
